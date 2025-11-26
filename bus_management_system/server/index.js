@@ -668,6 +668,24 @@ app.get("/api/attendance/:busNo/monthly", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch monthly attendance" });
   }
 });
+app.get('/api/stops', async (req, res) => {
+  const stopsDoc = await db.collection('stops').doc('lat_lng').get();
+  if (stopsDoc.exists) {
+    const data = stopsDoc.data();
+
+    const stops = Object.entries(data).map(([name, coords]) => {
+      let lat = null;
+      let lng = null;
+      console.log("COORDS :", coords);
+      lat = coords['0'];
+      lng = coords['1'];
+
+      return { name, lat, lng };
+    });
+
+    return res.json(stops);
+  }
+});
 
 const PORT = process.env.PORT || 5000;
 const real_db1 = admin.database();

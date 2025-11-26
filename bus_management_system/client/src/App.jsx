@@ -1,4 +1,5 @@
 import React from "react";
+import StudentBusSearch from "./pages/StudentBusSearch";
 
 import {
   BrowserRouter as Router,
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Login />} />
+          <Route path="/student" element={<StudentBusSearch />} />
 
           {/* Protected Routes */}
           <Route
